@@ -1,16 +1,3 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Product</title>
-</head>
-
-<body>
 	<div class="card">
 		<div class="row">
 			<aside class="col-md-5 col-sm-12 border-right">
@@ -40,10 +27,8 @@
 						<dd>ini nama penjual</dd>
 					</dl> <!-- item-property-hor .// -->
 					<hr>
-					<a href="#" class="btn btn-lg btn-primary text-uppercase">Beli</a>
+					<a href="#" class="btn btn-lg btn-primary text-uppercase" style="margin-bottom:100">Beli</a>
 				</article>
 			</aside>
 		</div>
 	</div>
-</body>
-</html>
