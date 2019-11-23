@@ -11,6 +11,7 @@ $route['pelanggan']			= 'pelanggan/index';
 $route['makanan']			= 'makanan/index';
 $route['pegawai']			= 'pegawai/index';
 $route['order']				= 'order/index';
+$route['product']			= 'product/index';
 
 
 ?>
