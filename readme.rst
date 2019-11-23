@@ -1,3 +1,22 @@
+#######################
+Info About This Project
+#######################
+This project for complete the task of Website Programming study.
+
+Created by group 4 : 
+
+Rezky Revindo
+
+Ainun Azizah
+
+Pandu Rizal
+
+M Alvie Helmuzar
+
+Coaching by :
+Fahmitaris
+
+
 ###################
 What is CodeIgniter
 ###################
