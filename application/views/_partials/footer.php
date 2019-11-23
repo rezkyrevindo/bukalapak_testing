@@ -1,10 +1,14 @@
 
   <!-- Footer -->
-            <footer class="d-flex justify-content-center mt-auto bg-danger" style="padding: 20px">
-                    <div class="text-center" style="color: #fff">
-                        &copy; 2019, crafted with love by <span>group 4</span>  
-                    </div>
-            </footer>
+<footer style="position: relative;
+bottom: 0;
+width: 100%;
+height: 3rem;   "
+	class="d-flex justify-content-center mt-auto bg-danger">
+        <div class="text-center" style="color: #fff; margin-top: 10px;">
+            &copy; 2019, crafted with love by <span>group 4</span>  
+        </div>
+</footer>
     
 
 
