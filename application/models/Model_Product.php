@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Model_Add_Product extends CI_Model
-{
+class Model_Product extends CI_Model{
+
     function __construct()
     {
         parent::__construct();
@@ -16,7 +16,7 @@ class Model_Add_Product extends CI_Model
     public function delete($id)
     {
         $this->db->where('id', $id);
-        $this->db->delete('pegawai');
+        $this->db->delete('product');
     }
 
     public function edit($id)
@@ -50,4 +50,3 @@ class Model_Add_Product extends CI_Model
         $this->db->insert('product', $data); // Untuk mengeksekusi perintah insert data
     }
 }
-?>

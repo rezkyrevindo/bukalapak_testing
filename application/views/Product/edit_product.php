@@ -5,7 +5,7 @@
 
             <form action="" class="form-horizontal " role="form">
                 <div class="form-group">
-                    <label for="name" class="col-sm-3 control-label ">Nama Product</label>
+                    <label for="name" class="col-sm-3 control-label">Nama Product</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" name="name" id="name">
                     </div>
@@ -14,12 +14,6 @@
                     <label for="about" class="col-sm-3 control-label">Deskripsi</label>
                     <div class="col-sm-9">
                         <textarea class="form-control"></textarea>
-                    </div>
-                </div> <!-- form-group // -->
-                <div class="form-group">
-                    <label for="qty" class="col-sm-3 control-label">Kuantitas</label>
-                    <div class="col-sm-3">
-                        <input type="text" class="form-control" name="qty" id="qty">
                     </div>
                 </div> <!-- form-group // -->
                 <div class="form-group">
@@ -32,7 +26,7 @@
                 <hr>
                 <div class="form-group">
                     <div class="col-sm-offset-3 col-sm-9" style="margin-bottom:55">
-                        <button type="submit" class="btn btn-primary">Tambah Barang</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                     </div>
                 </div> <!-- form-group // -->
             </form>
