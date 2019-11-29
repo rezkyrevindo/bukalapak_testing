@@ -6,42 +6,42 @@
 			parent::__construct();
 		}
 
-		public function getCart(){
-			return $this->db->get('Cart')->result_array();
+		public function getCart($id){
+			$this->db->select('*, (shopping_cart.qty * product.harga) as total');
+			$this->db->join('product', 'product.id_product = shopping_cart.id_product');
+			$this->db->where('shopping_cart.id_user', $id);
+			return $this->db->get('shopping_cart')->result_array();
 		}
 
 		public function delete($id){
-			$this->db->where('id_Cart', $id);
-			$this->db->delete('Cart');
+			$this->db->where('id_cart', $id);
+			$this->db->delete('shopping_cart');
 		}
 
-		public function edit($id){
+		public function edit($id_cart, $qty){
 			$data = array(
-		      "id_user" => $this->input->post(''),
-		      "id_product" => $this->input->post(''),
-		      "qty" => $this->input->post(''),
-		      "id_pemesanan" => $this->input->post('')
+		      "qty" => $qty
 		    );
 		    
-		    $this->db->where('id_Cart', $id);
-		    $this->db->update('Cart', $data);
+		    $this->db->where('id_cart', $id_cart);
+		    $this->db->update('shopping_cart', $data);
 		}
 
 		public function getById($id){
-			$this->db->where('id_Cart', $id);
-    		return $this->db->get('cart')->row();
+			$this->db->where('id_cart', $id);
+    		return $this->db->get('shopping_cart')->row();
 		}
 		
 		public function tambah(){
 		   $data = array(
-		      "id_user" => $this->input->post(''),
-		      "id_product" => $this->input->post(''),
-		      "qty" => $this->input->post(''),
-		      "id_pemesanan" => $this->input->post('')
+		      "id_user" => $this->session->userdata('id_user'),
+		      "id_product" => $id_product,
+		      "qty" => '1',
+		      "id_pemesanan" => $id_pemesanan
 		    );
 		    
 		    
-		    $this->db->insert('cart', $data); // Untuk mengeksekusi perintah insert data
+		    $this->db->insert('shopping_cart', $data); // Untuk mengeksekusi perintah insert data
 		}
 	
 	}
