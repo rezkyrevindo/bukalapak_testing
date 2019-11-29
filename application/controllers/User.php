@@ -31,6 +31,9 @@ class User extends CI_Controller {
 				redirect('home');
 			}
 		}
+		$this->load->view('_partials/header');
+		$this->load->view('login');
+		$this->load->view('_partials/footer');
 	}
 
 }

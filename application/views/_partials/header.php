@@ -32,11 +32,11 @@
         
 
         <li class="nav-item ">
-          <a class="nav-link" style="color: #fff" href="#">Login </a>
+          <a class="nav-link" style="color: #fff" href="<?php echo base_url ('user/Login') ?>">Login </a>
         </li>
 
         <li class="nav-item" style="margin-right: 20px">
-          <a class="nav-link" style="color: #fff" href="#">Daftar</a>
+          <a class="nav-link" style="color: #fff" href="<?php echo base_url ('user/register') ?>">Daftar</a>
         </li>
 
         
