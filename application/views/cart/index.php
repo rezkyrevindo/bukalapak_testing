@@ -24,10 +24,17 @@
         </tr>
       </tfoot>
       <tbody>
-        <?php foreach ($cart as $data): ?>
+        <?php 
+        $total = 0;
+        $id_pemesanan = -1;
+        foreach ($cart as $data): 
+          $id_pemesanan = $data['id_pemesanan'];
+          $total += $data['total'];
+          ?>
+
         <tr>
           <th scope="row"><?= $data['nama_product'] ?></th>
-          <td><img src=""></td>
+          <td><img width="100" height="100" src="<?= base_url('upload/img/'.$data['img'])?>"></td>
           <td class="text-center">
             <form action="<?= base_url('cart/edit/'.$data['id_cart']) ?>" method="post">
             <input type="number" style=" text-align: center" class="form-control" name="qty" value="<?= $data['qty'] ?>">
@@ -47,8 +54,10 @@
 
       </tbody> 
     </table>
-    
-    <input type="submit" name="submit" value="Proceed checkout" style="float:right;margin-top: 10px;" class="btn btn-primary">
+    <hr>
+    <small> Total Bayar </small><br>
+    <h3 style="color:red"><?= 'Rp'.number_format($total)  ?></h3>
+    <a href="<?= base_url('order/checkout/'.$id_pemesanan.'/'.$total )?>" name="submit" style="margin-top: 20px; margin-bottom: 20px;" class="btn btn-success">Checkout</a>
 
   </div>
 </div>

@@ -1,6 +1,6 @@
 
   <!-- Footer -->
-<footer style="position: absolute;
+<footer style="position: relative;
 bottom: 0;
 width: 100%;
 height: 3rem;
@@ -8,7 +8,7 @@ margin-top: 30px;
    "
 	class="d-flex justify-content-center mt-auto bg-danger">
         <div class="text-center" style="color: #fff; margin-top: 10px;">
-            &copy; 2019, crafted with love by <span>group 4</span>  
+            &copy; 2019, crafted with love by <span>group 2</span>  
         </div>
 </footer>
     

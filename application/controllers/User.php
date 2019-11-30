@@ -10,30 +10,47 @@ class User extends CI_Controller {
 	}
 
 	public function register(){
-		$this->load->view('_partials/header');
+		// ainun
+		if($this->session->userdata('username') != null){
+			redirect('user/login');
+		}
+		if ($this->input->post('submit')) {
+			$data = $this->model_user->tambah();
+			 $this->session->set_flashdata('success', 'Berhasil disimpan');
+		    redirect('user/login');
+		}		
 		$this->load->view('user/register');
-		$this->load->view('_partials/footer');
 	}
 
 	public function login(){
+		// ainun
+		if($this->session->userdata('username') != null){
+			redirect('user/login');
+		}
 		if($this->input->post('submit')){
-			$data = $this->model_user->getByUsername($this->input->post('nohp'));
+			$data = $this->model_user->getByUsername($this->input->post('email'));
 			if ($data == false){
-
 				$this->session->set_flashdata('error', 'Berhasil disimpan');
 				redirect('register');
-			}
+			} else
 			if ($data->password_user == $this->input->post('password')){
+
 				$this->session->set_userdata('username', $data->email_user);
 				$this->session->set_userdata('nama', $data->nama_user);
 				$this->session->set_userdata('id_user', $data->id_user);
+				$this->session->set_userdata('status', 'pembeli');
 				$this->session->set_userdata('type', 'user');
 				redirect('home');
 			}
 		}
-		$this->load->view('_partials/header');
 		$this->load->view('login');
-		$this->load->view('_partials/footer');
+	}
+
+	public function logout(){
+		// ainun
+		$this->session->sess_destroy();
+		session_unset();
+		redirect('user/login');
 	}
 
 }

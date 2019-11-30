@@ -4,53 +4,117 @@
 	class Model_order extends CI_Model {
 		function __construct() {
 			parent::__construct();
+			date_default_timezone_set('Asia/Jakarta');
 		}
 
 		public function getOrder(){
+			// rezky
+			$this->db->where('pemesanan.status_pemesanan != ', 'pending');
+			$this->db->where('pemesanan.id_user',$this->session->userdata('id_user'));
+			return $this->db->get('pemesanan')->result_array();
+		}
+
+		public function getOrderMasuk(){
+			// rezky
 			$this->db->select('*');
-			$this->db->from('orders');
-			$this->db->join('pelanggan', 'pelanggan.id_pelanggan = orders.id_pelanggan');
-			$this->db->join('makanan', 'makanan.id_makanan = orders.id_makanan');
-			$this->db->join('pegawai', 'pegawai.id_pegawai = orders.id_pegawai');
-			return $this->db->get()->result_array();
+			$this->db->join('shopping_cart', 'shopping_cart.id_pemesanan = pemesanan.id_pemesanan');
+			$this->db->join('product', 'product.id_product = shopping_cart.id_product');
+			$this->db->join('user', 'user.id_user = product.id_user');
+			$this->db->where('status_pemesanan != ', 'pending');
+			$this->db->where('product.id_user',$this->session->userdata('id_user'));
+			return $this->db->get('pemesanan')->result_array();
 		}
 
-		public function delete($id){
-			$this->db->where('id_order', $id);
-			$this->db->delete('orders');
-		}
+		 public function getIdPemesanan(){
+		 	// rezky
+            $this->db->select('id_pemesanan');
+            $this->db->where('id_user', $this->session->userdata('id_user'));
+            $this->db->where('status_pemesanan', 'pending');
+            $this->db->order_by('id_pemesanan','DESC');
+            $data = $this->db->get('pemesanan')->row_array();
+            if (sizeof($data) > 0){
+            	return $data['id_pemesanan'];
+            }else{
+            	$this->db->select('id_pemesanan');
+	            $this->db->order_by('id_pemesanan','DESC');
+	            $new = $this->db->get('pemesanan')->result_array();
 
-		public function edit($id){
+	            $ins = array(
+			      "id_user" => $this->session->userdata('id_user')
+
+			    );
+		    	$this->db->insert('pemesanan', $ins);
+
+	            return $this->getIdTerakhir()['id_pemesanan'];
+            }
+    	}	
+
+    	public function getIdTerakhir(){
+    		// rezky
+            $this->db->select('id_pemesanan');
+            $this->db->order_by('id_pemesanan','DESC');
+            return $this->db->get('pemesanan')->row_array();
+    	}
+
+		
+
+		public function checkout($id, $total){
+			// rezky
 			$data = array(
-		      "id_pelanggan" => $this->input->post('id_pelanggan'),
-		      "id_pegawai" => $this->input->post('id_pegawai'),
-		      "id_makanan" => $this->input->post('id_makanan'),
-		      "quantity" => $this->input->post('qty')
+		      "status_pemesanan" => 'checkout',
+		      "waktu" => date('Y-m-d H:m:s'),
+		      'total' => $total
+		      
 		    );
 		    
-		    $this->db->where('id_order', $id);
-		    $this->db->update('orders', $data);
+		    $this->db->where('id_pemesanan', $id);
+		    $this->db->update('pemesanan', $data);
+
+		    $data = array(
+		      "status" => 'checkout'
+		    );
+		    
+		    $this->db->where('id_pemesanan', $id);
+		    $this->db->update('shopping_cart', $data);
+		}
+
+		public function kirim($id){
+			// rezky
+			$data = array(
+		      "status" => 'shipping',
+		      "jasa_pengiriman" => $this->input->post('jasa_pengiriman'),
+		      "no_resi" => $this->input->post('no_resi')
+		    );
+		    
+		    $this->db->where('id_cart', $id);
+		    $this->db->update('shopping_cart', $data);
+		}
+
+		public function pengiriman_selesai($id){
+			// rezky
+			$data = array(
+		      "status" => 'selesai'
+		    );
+		    
+		    $this->db->where('id_cart', $id);
+		    $this->db->update('shopping_cart', $data);
 		}
 
 		public function getById($id){
-			$this->db->select('*');
-			$this->db->join('pelanggan', 'pelanggan.id_pelanggan = orders.id_pelanggan');
-			$this->db->join('makanan', 'makanan.id_makanan = orders.id_makanan');
-			$this->db->join('pegawai', 'pegawai.id_pegawai = orders.id_pegawai');
-			$this->db->where('id_order', $id);
-    		return $this->db->get('orders')->row();
+			// rezky
+			
+			$this->db->join('shopping_cart', 'shopping_cart.id_pemesanan = pemesanan.id_pemesanan');
+			$this->db->join('product', 'product.id_product = shopping_cart.id_product');
+			$this->db->where('pemesanan.status_pemesanan != ', 'pending');
+			$this->db->where('pemesanan.id_user',$this->session->userdata('id_user'));
+			$this->db->where('pemesanan.id_pemesanan', $id);
+			return $this->db->get('pemesanan')->result_array();
 		}
-		
-		public function tambah(){
-		   $data = array(
-		      "id_pelanggan" => $this->input->post('id_pelanggan'),
-		      "id_pegawai" => $this->input->post('id_pegawai'),
-		      "id_makanan" => $this->input->post('id_makanan'),
-		      "quantity" => $this->input->post('qty')
-		    );
-		    
-		    
-		    $this->db->insert('orders', $data); // Untuk mengeksekusi perintah insert data
+	
+		public function delete($id){
+			// rezky
+			$this->db->where('id_pemesanan', $id);
+			$this->db->delete('pemesanan');
 		}
 	
 	}

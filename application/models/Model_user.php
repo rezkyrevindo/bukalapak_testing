@@ -9,17 +9,19 @@ class Model_user extends CI_Model {
 
 
 		public function delete($id_anggota){
+			// ainun
 			$this->db->where('id_user', $id_anggota);
 			$this->db->delete('user');
 		}
 
 		public function edit($id_anggota){
+			// ainun
 			$data = array(
 
 		      "nama_user" => $this->input->post('nama'),
-		      "alamat_user" => $this->input->post('email'),
-		      "email_user" => $this->input->post('password'),
-		      "password_user" => $this->input->post('alamat')
+		      "alamat_user" => $this->input->post('alamat'),
+		      "email_user" => $this->input->post('email'),
+		      "password_user" => $this->input->post('password')
 		    );
 		    
 		    $this->db->where('id_user', $id_anggota);
@@ -27,20 +29,23 @@ class Model_user extends CI_Model {
 		}
 
 		public function getById($id_anggota){
+			// ainun
 			$this->db->where('id_user', $id_anggota);
     		return $this->db->get('user')->row();
 		}
 		public function getByUsername($username){
+			// ainun
 			$this->db->where('email_user', $username);
     		return $this->db->get('user')->row();
 		}
 		public function tambah(){
+			// ainun
 		  	$data = array(
 
 		      "nama_user" => $this->input->post('nama'),
-		      "alamat_user" => $this->input->post('email'),
-		      "email_user" => $this->input->post('password'),
-		      "password_user" => $this->input->post('alamat')
+		      "alamat_user" => $this->input->post('alamat'),
+		      "email_user" => $this->input->post('email'),
+		      "password_user" => $this->input->post('password')
 		    );
 		    
 		    

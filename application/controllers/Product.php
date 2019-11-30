@@ -12,45 +12,60 @@ class Product extends CI_Controller
 
     public function index()
     {
+        // pandu
         $data['product'] = $this->model_product->getProduct();
         $this->load->view('_partials/header');
-        $this->load->view('Product/index', $data);
+        $this->load->view('product/index', $data);
         $this->load->view('_partials/footer');
     }
 
-    public function delete($id)
+    public function detail_product($id)
     {
-        // if($this->session->userdata('username') == null){
-        // 	redirect('register');
-        // }
+        // pandu
+        $data['product'] = $this->model_product->getById($id);
+        $this->load->view('_partials/header');
+        $this->load->view('product/detail', $data);
+        $this->load->view('_partials/footer');
+    }
+
+    
+    public function delete($id){
+        // pandu
+        if($this->session->userdata('username') == null){
+            redirect('user/login');
+        }
 
         $this->model_product->delete($id);
         redirect(base_url('product'));
     }
-    public function edit($id)
-    {
-        // if($this->session->userdata('username') == null){
-        // 	redirect('register');
-        // }
 
+    public function edit($id){
+        // pandu
+        if($this->session->userdata('username') == null){
+            redirect('user/login');
+        }
+        if($this->input->post('submit')){ // Jika user mengklik tombol submit yang ada di form
+          $this->model_product->edit($id); // Panggil fungsi edit() yang ada di SiswaModel.php
+          redirect('product');
+        }
+        $data['product'] = $this->model_product->getById($id);
         $this->load->view('_partials/header');
-        $this->load->view('Product/edit_product');
+        $this->load->view('product/edit_product', $data);
         $this->load->view('_partials/footer');
-
-        // $this->model_product->edit($id); // Panggil fungsi edit() yang ada di SiswaModel.php
-        // redirect('product');
     }
-    public function add()
-    {
-        // if($this->session->userdata('username') == null){
-        // 	redirect('register');
-        // }
-
+    public function tambah(){
+        // pandu
+        if($this->session->userdata('username') == null){
+            redirect('user/login');
+        }
+        if($this->input->post('submit')){ // Jika user mengklik tombol submit yang ada di form
+            $this->model_product->tambah(); // Panggil fungsi save() yang ada di SiswaModel.php
+            
+            redirect('product');
+        }
+        $data['product'] = $this->model_product->getProduct();
         $this->load->view('_partials/header');
-        $this->load->view('Product/add_product');
+        $this->load->view('product/add_product');
         $this->load->view('_partials/footer');
-
-        // $this->model_product->edit($id); // Panggil fungsi edit() yang ada di SiswaModel.php
-        // redirect('product');
     }
 }
